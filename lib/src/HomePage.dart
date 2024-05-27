@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,27 +9,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _controllerAlcool = TextEditingController();
-  final TextEditingController _controllerGasolina = TextEditingController();
-  String _result = "";
+  String _prize = "0.0";
 
-  void _calcular() {
-    var alcool = double.tryParse(_controllerAlcool.text);
-    var gasolina = double.tryParse(_controllerGasolina.text);
+  _updatePrice() async {
+    var url = "https://blockchain.info/ticker";
+    final dio = Dio();
+    final response = await dio.get(url);
 
-    if (alcool == null || gasolina == null) {
-      _result = "Número inválido, digite números mariores que 0 e com ponto";
-    } else {
-      /**
-       * Se o preço do álcool divido pelo preço da gasolina
-       * for >= 0.7 é melhor abastecer com gasolina
-       * senão é melhor utilizar álcool
-       */
-
-      _result = ((alcool / gasolina) >= 0.7)
-          ? "Melhor abastecer com gasolina"
-          : "Melhor abastecer com álcool";
-    }
+    // print(response.data['BRL']['buy']);
+    _prize = response.data['BRL']['buy'].toString();
     setState(() {});
   }
 
@@ -36,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Álcool ou gasolina app"),
+        title: const Text("Bitcoin price"),
       ),
       body: Container(
         padding: const EdgeInsets.all(32),
@@ -44,62 +33,22 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(
-                height: 20,
-              ),
+              Image.asset("assets/images/logo.png"),
               Padding(
-                padding: const EdgeInsets.only(bottom: 32),
-                child: Image.asset("assets/images/logo.png"),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 32, top: 30),
                 child: Text(
-                  "Saiba qual a melhor opção para abastecimento do seu veículo",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  'R\$ $_prize',
+                  style: const TextStyle(fontSize: 35),
                 ),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: "Preço alcool, ex: 1.59",
-                ),
-                style: const TextStyle(
-                  fontSize: 22,
-                ),
-                controller: _controllerAlcool,
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: "Preço gasolina, ex: 3.59",
-                ),
-                style: const TextStyle(
-                  fontSize: 22,
-                ),
-                controller: _controllerGasolina,
               ),
               const SizedBox(
                 height: 20,
               ),
               FilledButton(
-                onPressed: () => _calcular(),
-                child: const Text('Calcular'),
+                onPressed: () => _updatePrice(),
+                child: const Text('Atualizar'),
+                // style: const ButtonStyle(backgroundColor: Colors.orange),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                ),
-                child: Text(
-                  _result,
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
             ],
           ),
         ),
