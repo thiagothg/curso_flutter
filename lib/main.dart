@@ -16,6 +16,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(foregroundColor: Colors.deepPurple),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(backgroundColor: Colors.deepPurple),
+        ),
+        appBarTheme: const AppBarTheme(
+          color: Colors.deepPurple,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
