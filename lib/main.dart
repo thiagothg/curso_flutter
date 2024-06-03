@@ -1,4 +1,8 @@
 import 'package:app_curso/src/HomePage.dart';
+import 'package:app_curso/src/layout_builder_page.dart';
+import 'package:app_curso/src/orientation_page.dart';
+import 'package:app_curso/src/responsive_row_col.dart';
+import 'package:app_curso/src/responsive_wrap.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,14 +26,25 @@ class MyApp extends StatelessWidget {
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(backgroundColor: Colors.deepPurple),
         ),
+        iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(
+            foregroundColor: Colors.white,
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(foregroundColor: Colors.white)),
         appBarTheme: const AppBarTheme(
           color: Colors.deepPurple,
           titleTextStyle: TextStyle(
             color: Colors.white,
+            backgroundColor: Colors.purpleAccent,
           ),
         ),
       ),
       debugShowCheckedModeBanner: false,
+      // home: const ResponsiveWrap(),
+      // home: const OrientationPage(),
+      // home: const LayoutBuilderPage(),
       home: const HomePage(),
     );
   }
