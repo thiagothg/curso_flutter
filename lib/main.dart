@@ -1,8 +1,4 @@
 import 'package:app_curso/src/HomePage.dart';
-import 'package:app_curso/src/layout_builder_page.dart';
-import 'package:app_curso/src/orientation_page.dart';
-import 'package:app_curso/src/responsive_row_col.dart';
-import 'package:app_curso/src/responsive_wrap.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,13 +14,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
         textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: Colors.deepPurple),
+          style: TextButton.styleFrom(foregroundColor: Colors.red),
         ),
         filledButtonTheme: FilledButtonThemeData(
-          style: FilledButton.styleFrom(backgroundColor: Colors.deepPurple),
+          style: FilledButton.styleFrom(backgroundColor: Colors.red),
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
@@ -34,11 +30,13 @@ class MyApp extends StatelessWidget {
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white)),
         appBarTheme: const AppBarTheme(
-          color: Colors.deepPurple,
+          elevation: 4,
+          color: Colors.white,
           titleTextStyle: TextStyle(
-            color: Colors.white,
-            backgroundColor: Colors.purpleAccent,
+            // color: Colors.white,
+            backgroundColor: Colors.white,
           ),
+          iconTheme: IconThemeData(color: Colors.grey),
         ),
       ),
       debugShowCheckedModeBanner: false,
